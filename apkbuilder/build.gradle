@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+group = 'com.github.gp03trxm'
 
 android {
     compileSdkVersion 29
@@ -19,8 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-
 }
 
 dependencies {
@@ -31,4 +30,18 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/tiny-sign-0.9.jar')
     compile files('libs/commons-io-2.5.jar')
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.gp03trxm'
+                artifactId = 'Auto.js-ApkBuilder'
+                version = '1.0'
+            }
+        }
+    }
 }
